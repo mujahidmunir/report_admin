@@ -45,6 +45,8 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
+        $created_at =  Carbon::parse($request->input('created'))->format('Y-m-d H:i:s');
+
         $img = $request->file('img');
         $file_name = now()->timestamp.'.png';
 
@@ -54,7 +56,7 @@ class ReportController extends Controller
         });
         $upload_img->save(public_path("images/reports/{$file_name}"), 80, 'png');
 
-        Report::create([
+        $create = Report::create([
             'user_id' => Auth::user()->id ,
             'title' => $request->input('title'),
             'category_id' => $request->input('cat'),
@@ -62,6 +64,14 @@ class ReportController extends Controller
             'link' => $request->input('link'),
             'image' => $file_name
         ]);
+
+        if ($request->input('created') == !null){
+            Report::whereId($create->id)->update([
+                'created_at' => $created_at,
+                'updated_at' => $created_at
+            ]);
+        }
+
         return redirect('/');
     }
 

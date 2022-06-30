@@ -9,7 +9,7 @@ class Report extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
+    public $timestamps = true;
     public function category(){
         return $this->belongsTo(Category::class);
     }

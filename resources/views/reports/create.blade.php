@@ -34,11 +34,18 @@
                     <label for="formFileSm" class="form-label">Image</label>
                     <input class="form-control form-control-sm" name="img" id="formFileSm" type="file">
                 </div>
+
+                <div class="mb-3">
+                    <label for="formFileSm" class="form-label">Date</label><br>
+                    <input class="form-control form-control-sm" name="created" type="date">
+                    <small class="text-danger">Isi Jika Upload Report Bukan Hari ini</small>
+                </div>
+
+
             </div>
 
             <div class="card-footer pt-3 pb-3">
                 <div class="d-grid">
-
                     <button type="submit" class="btn btn-sm btn-primary"><i class="bx bx-upload"></i> &nbsp; Upload</button>
                 </div>
             </div>
@@ -155,8 +162,8 @@
             <form method="post" action="{{route('addCategory')}}" id="formAddSubCat">
                 @csrf
             <div class="modal-body text-dark">
-                <input type="text" class="form-control" name="name" required id="name">
-                <input type="text" class="form-control" name="parent" value="" id="prn">
+                <input type="text" class="form-control" placeholder="Name" name="name" required id="name">
+                <input type="hidden" class="form-control" name="parent" value="" id="prn">
             </div>
             <div class="modal-footer border-dark">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
