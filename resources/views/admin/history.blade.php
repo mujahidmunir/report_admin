@@ -13,6 +13,7 @@
                         <th>No</th>
                         <th>Title</th>
                         <th>Category</th>
+                        <th>Link</th>
                         <th>Sub Category</th>
                         <th>Report Date</th>
                         <th width="10%" class="text-center">Action</th>
@@ -24,6 +25,7 @@
                             <td>{{$key+1}}</td>
                             <td>{{$data->title}}</td>
                             <td>{{$data->category->name}}</td>
+                            <td>{{$data->link}}</td>
                             <td>{{$data->subCategory ? $data->subCategory->name : null}}</td>
                             <td>{{date('d-m-Y || H:s', strtotime($data->created_at))}}</td>
                             <td><a href="{{$data->link}}" target="_blank" class="btn btn-sm btn-primary d-grid">view</a> </td>
