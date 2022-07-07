@@ -14,7 +14,7 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $reports = Report::all();
+        $reports = Report::orderBy('created_at', 'DESC')->get();
         return view('reports.history', compact('reports'));
     }
 
