@@ -1,6 +1,6 @@
 APP_NAME=Laravel
 APP_ENV=local
-APP_KEY=base64:7ZNVLtqN8VypaYazz1VOjFh7ekbKqEu5/hn5gIyBlrk=
+APP_KEY=base64:/hul/4q/rESSbuLLIjCsAh7HShFuRaTlrAbxdEjGVro=
 APP_DEBUG=true
 APP_URL=http://localhost
 
@@ -12,8 +12,8 @@ DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=sund2515_report_bjb
-DB_USERNAME=sund2515_user
-DB_PASSWORD=h29vuh5ta38l
+DB_USERNAME=sund2515_reportbjb
+DB_PASSWORD=sund2515_reportbjb
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
