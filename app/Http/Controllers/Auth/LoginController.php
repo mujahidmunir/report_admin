@@ -42,9 +42,11 @@ class LoginController extends Controller
     public function authenticated(Request $request, $user)
     {
         if ($user->hasRole('admin')){
-            return redirect('admin');
+            return redirect('admin/report');
         } else {
             return redirect('/');
         }
     }
 }
+
+
