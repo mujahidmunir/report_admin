@@ -24,7 +24,7 @@
 
                 <div class="mt-4">
                     <label class="form-label">Action</label>
-                    <select class="single-select" name="action" >
+                    <select class="single-select" name="action_id" >
                         <option value="">Select Action</option>
                         <div class="fieldCat"></div>
                         <option value="1">Create</option>
