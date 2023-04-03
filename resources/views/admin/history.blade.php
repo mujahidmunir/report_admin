@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('content')
     <div class="card border-0 border-start border-bottom border-5 radius-15 border-secondary">

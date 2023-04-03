@@ -29,8 +29,8 @@ Route::group(['middleware' => ['auth:web']], function (){
 });
 
 Route::group(['middleware' => ['auth:web', 'role:admin'], 'prefix' => 'admin'], function () {
-        Route::get('report', [\App\Http\Controllers\Admin\ReportController::class, 'index']);
-        Route::get('article', [\App\Http\Controllers\Admin\ReportController::class, 'article']);
+        Route::get('report', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('admin.report');
+        Route::get('article', [\App\Http\Controllers\Admin\ReportController::class, 'article'])->name('admin.article');
 
 
 });
