@@ -14,7 +14,12 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $reports = Report::orderBy('created_at', 'DESC')->get();
+        $reports = Report::orderBy('created_at', 'DESC')->whereNotIn('category_id', [349])->get();
+        return view('admin.history', compact('reports'));
+    }
+
+    public function article(){
+        $reports = Report::orderBy('created_at', 'DESC')->whereIn('category_id', [349])->get();
         return view('admin.history', compact('reports'));
     }
 
