@@ -21,11 +21,23 @@
 
                     </select>
                 </div>
-                <div class="mt-4 select2-sm">
-                    <label class="form-label">Sub Category</label>
-                    <select class="single-select" name="sub" id="SubCategory">
+
+                <div class="mt-4">
+                    <label class="form-label">Action</label>
+                    <select class="single-select" name="action" >
+                        <option value="">Select Action</option>
+                        <div class="fieldCat"></div>
+                        <option value="1">Create</option>
+                        <option value="2">Update</option>
+                        <option value="3">Delete</option>
+
                     </select>
                 </div>
+{{--                <div class="mt-4 select2-sm">--}}
+{{--                    <label class="form-label">Sub Category</label>--}}
+{{--                    <select class="single-select" name="sub" id="SubCategory">--}}
+{{--                    </select>--}}
+{{--                </div>--}}
 
                 <label for="formFileSm" class="form-label mt-3">Link</label>
                 <input type="url" name="link" required class="form-control mb-3">

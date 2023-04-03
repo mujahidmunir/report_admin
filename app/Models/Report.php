@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Report extends Model
 {
     use HasFactory;
@@ -16,5 +17,8 @@ class Report extends Model
 
     public function subCategory(){
         return $this->belongsTo(Category::class, 'sub_category_id', 'id');
+    }
+    public function action(){
+        return $this->belongsTo(Action::class, 'action_id', 'id');
     }
 }

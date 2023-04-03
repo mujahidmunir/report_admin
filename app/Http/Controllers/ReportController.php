@@ -59,6 +59,7 @@ class ReportController extends Controller
         $create = Report::create([
             'user_id' => Auth::user()->id ,
             'title' => $request->input('title'),
+            'action' => $request->input('action'),
             'category_id' => $request->input('cat'),
             'sub_category_id' => $request->input('sub'),
             'link' => $request->input('link'),

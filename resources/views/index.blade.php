@@ -9,23 +9,26 @@
             <div class="table-responsive">
                 <table id="example2" class="table table-striped table-bordered">
                     <thead>
+                    <thead>
                     <tr>
                         <th>No</th>
+                        <th>Action</th>
                         <th>Title</th>
                         <th>Category</th>
                         <th>Sub Category</th>
-                        <th width="10%" class="text-center">Action</th>
+                        <th width="10%" class="text-center"></th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($reports as $key => $data)
-                    <tr>
-                        <td>{{$key+1}}</td>
-                        <td>{{$data->title}}</td>
-                        <td>{{$data->category->name}}</td>
-                        <td>{{$data->subCategory ? $data->subCategory->name : null}}</td>
-                        <td><a href="{{$data->link}}" target="_blank" class="btn btn-sm btn-primary d-grid">view</a> </td>
-                    </tr>
+                        <tr>
+                            <td>{{$key+1}}</td>
+                            <td>{{$data->action ? $data->action->name : null}}</td>
+                            <td>{{$data->title}}</td>
+                            <td>{{$data->category->name}}</td>
+                            <td>{{$data->subCategory ? $data->subCategory->name : null}}</td>
+                            <td><a href="{{$data->link}}" target="_blank" class="btn btn-sm btn-primary d-grid">view</a> </td>
+                        </tr>
                     @endforeach
                     </tbody>
 

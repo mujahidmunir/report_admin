@@ -11,6 +11,7 @@
                     <thead>
                     <tr>
                         <th>No</th>
+                        <th>Action</th>
                         <th>Title</th>
                         <th>Category</th>
                         <th>Link</th>
@@ -23,6 +24,7 @@
                     @foreach($reports as $key => $data)
                         <tr>
                             <td>{{$key+1}}</td>
+                            <td>{{$data->action ?  $data->action->name : null}}</td>
                             <td>{{$data->title}}</td>
                             <td>{{$data->category->name}}</td>
                             <td>{{$data->link}}</td>

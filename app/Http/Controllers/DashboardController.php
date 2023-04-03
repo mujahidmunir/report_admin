@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index(){
-        $reports = Report::whereDate('created_at', Carbon::today())->with('category', 'subCategory')->get();
-//        return $reports;
+        $reports = Report::whereDate('created_at', Carbon::today())->with('category', 'subCategory', 'action')->get();
+
         return view('index', compact('reports'));
     }
 }
