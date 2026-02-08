@@ -1,6 +1,20 @@
 @extends('layouts.admin')
 
 @section('content')
+    <div class="card-body">
+
+        <form method="get" action="{{route('admin.report')}}">
+            <label for="formFileSm" class="form-label">Bulan</label>
+            <input type="text" name="month"  class="form-control mb-3">
+            <label for="formFileSm" class="form-label">Tahun</label>
+            <input type="text" name="year"  class="form-control mb-3">
+            <div class="col-lg-6">
+                <input class="btn btn-primary" type="submit" value="Cari">
+                <a href="{{route('admin.report')}}" class="btn btn-warning" value="Reset">Reset</a>
+            </div>
+
+        </form>
+    </div>
     <div class="card border-0 border-start border-bottom border-5 radius-15 border-secondary">
         <div class="card-header ">
             <h5 class="mt-3 mb-3">History Report</h5>
@@ -33,6 +47,7 @@
                     </tbody>
 
                 </table>
+                `
             </div>
         </div>
     </div>
