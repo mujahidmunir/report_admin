@@ -20,7 +20,7 @@ class ReportController extends Controller
         if ($month) {
             $query->whereMonth('created_at', $month);
         }
-        $reports = $query->latest()->get();
+        $reports = $query->oldest()->get();
         return view('admin.history', compact('reports', 'year'));
     }
 
