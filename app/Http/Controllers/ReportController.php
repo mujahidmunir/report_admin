@@ -47,14 +47,6 @@ class ReportController extends Controller
     {
         $created_at =  Carbon::parse($request->input('created'))->format('Y-m-d H:i:s');
 
-        $img = $request->file('img');
-        $file_name = now()->timestamp.'.png';
-
-        $img = ImageManagerStatic::make($img);
-        $upload_img = $img->resize(null, 700, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-        $upload_img->save(public_path("images/reports/{$file_name}"), 80, 'png');
 
         $create = Report::create([
             'user_id' => Auth::user()->id ,
@@ -62,8 +54,7 @@ class ReportController extends Controller
             'action_id' => $request->input('action_id'),
             'category_id' => $request->input('cat'),
             'sub_category_id' => $request->input('sub'),
-            'link' => $request->input('link'),
-            'image' => $file_name
+            'link' => $request->input('link')
         ]);
 
         if ($request->input('created') == !null){

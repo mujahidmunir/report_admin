@@ -15,9 +15,7 @@
                         <th>Title</th>
                         <th>Category</th>
                         <th>Link</th>
-                        <th>Sub Category</th>
                         <th>Report Date</th>
-                        <th width="10%" class="text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,10 +25,9 @@
                             <td>{{$data->action ?  $data->action->name : null}}</td>
                             <td>{{$data->title}}</td>
                             <td>{{$data->category->name}}</td>
-                            <td>{{$data->link}}</td>
-                            <td>{{$data->subCategory ? $data->subCategory->name : null}}</td>
+                            <td><a href="{{$data->link}}" target="blank">{{$data->link}}</a></td>
                             <td>{{date('d-m-Y || H:s', strtotime($data->created_at))}}</td>
-                            <td><a href="{{$data->link}}" target="_blank" class="btn btn-sm btn-primary d-grid">view</a> </td>
+
                         </tr>
                     @endforeach
                     </tbody>

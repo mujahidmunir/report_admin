@@ -15,8 +15,7 @@
                         <th>Action</th>
                         <th>Title</th>
                         <th>Category</th>
-                        <th>Sub Category</th>
-                        <th width="10%" class="text-center"></th>
+                        <th width="10%" class="text-center">Link</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,7 +24,6 @@
                             <td>{{$key+1}}</td>
                             <td>{{$data->action ? $data->action->name : null}}</td>
                             <td>{{$data->title}}</td>
-                            <td>{{$data->category->name}}</td>
                             <td>{{$data->subCategory ? $data->subCategory->name : null}}</td>
                             <td><a href="{{$data->link}}" target="_blank" class="btn btn-sm btn-primary d-grid">view</a> </td>
                         </tr>

@@ -42,10 +42,7 @@
                 <label for="formFileSm" class="form-label mt-3">Link</label>
                 <input type="url" name="link" required class="form-control mb-3">
 
-                <div class="mb-3">
-                    <label for="formFileSm" class="form-label">Image</label>
-                    <input class="form-control form-control-sm" name="img" id="formFileSm" type="file">
-                </div>
+                
 
                 <div class="mb-3">
                     <label for="formFileSm" class="form-label">Date</label><br>
