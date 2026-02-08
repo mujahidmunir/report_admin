@@ -16,19 +16,12 @@ class ReportController extends Controller
     {
         $year  = $request->get('year', date('Y'));
         $month = $request->get('month');
-
         $query = Report::whereYear('created_at', $year);
-
         if ($month) {
             $query->whereMonth('created_at', $month);
         }
-
         $reports = $query->latest()->get();
-
-
         return view('admin.history', compact('reports', 'year'));
-//        $reports = Report::whereYear('created_at', date('Y'))->orderBy('created_at', 'DESC')->get();
-//        return view('admin.history', compact('reports'));
     }
 
     public function article(){

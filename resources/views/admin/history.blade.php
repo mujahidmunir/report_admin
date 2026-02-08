@@ -4,12 +4,12 @@
     <div class="card-body">
 
         <form method="get" action="{{route('admin.report')}}">
-            <label for="formFileSm" class="form-label">Bulan</label>
+            <label for="formFileSm" class="form-label">Input Month</label>
             <input type="text" name="month"  class="form-control mb-3">
-            <label for="formFileSm" class="form-label">Tahun</label>
+            <label for="formFileSm" class="form-label">Input Year</label>
             <input type="text" name="year"  class="form-control mb-3">
             <div class="col-lg-6">
-                <input class="btn btn-primary" type="submit" value="Cari">
+                <input class="btn btn-primary" type="submit" value="Find">
                 <a href="{{route('admin.report')}}" class="btn btn-warning" value="Reset">Reset</a>
             </div>
 
