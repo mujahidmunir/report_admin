@@ -9,7 +9,6 @@
             <div class="table-responsive">
                 <table id="example2" class="table table-striped table-bordered">
                     <thead>
-                    <thead>
                     <tr>
                         <th>No</th>
                         <th>Action</th>
@@ -24,7 +23,7 @@
                             <td>{{$key+1}}</td>
                             <td>{{$data->action ? $data->action->name : null}}</td>
                             <td>{{$data->title}}</td>
-                            <td>{{$data->subCategory ? $data->subCategory->name : null}}</td>
+                            <td>{{$data->category ? $data->category->name : null}}</td>
                             <td><a href="{{$data->link}}" target="_blank" class="btn btn-sm btn-primary d-grid">view</a> </td>
                         </tr>
                     @endforeach

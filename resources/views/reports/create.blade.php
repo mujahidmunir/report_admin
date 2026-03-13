@@ -46,7 +46,7 @@
 
                 <div class="mb-3">
                     <label for="formFileSm" class="form-label">Date</label><br>
-                    <input class="form-control form-control-sm" name="created" type="date">
+                    <input class="form-control datepicker" name="created" type="text">
                     <small class="text-danger">Isi Jika Upload Report Bukan Hari ini</small>
                 </div>
 

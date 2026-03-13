@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{asset('assets/css/header-colors.css')}}" />
 
     <link href="{{asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet"/>
+
     @stack('head')
     <title>Report</title>
 </head>
