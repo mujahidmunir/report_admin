@@ -15,7 +15,7 @@
             <div class="page-header-content">
 
                 <div class="page-header-icon">
-                    <i class="fas fa-calendar-alt"></i>
+                    <i class="bx bx-calendar"></i>
                 </div>
 
                 <div>
@@ -44,7 +44,7 @@
                 <div class="section-title-wrapper">
 
                     <div class="section-icon">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="bx bx-list-ul"></i>
                     </div>
 
                     <div>
@@ -62,7 +62,7 @@
             </div>
 
 
-            <div class="card-body p-0">
+            <div class="card-body ">
 
                 <div class="table-responsive">
 
@@ -207,7 +207,7 @@
                 <div class="section-title-wrapper">
 
                     <div class="section-icon calendar-icon">
-                        <i class="fas fa-calendar-check"></i>
+                        <i class="bx bx-calendar"></i>
                     </div>
 
                     <div>
