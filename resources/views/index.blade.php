@@ -66,33 +66,11 @@
             <div class="card-body">
 
                 <div id="workCalendar"></div>
-
-            </div>
-
-        </div>
-
-
-        {{-- ========================================================= --}}
-        {{-- LEGEND USER --}}
-        {{-- ========================================================= --}}
-
-        <div class="card shadow-sm border-0 mt-3">
-
-            <div class="card-header">
-
                 <strong>
                     <i class="fas fa-users mr-2"></i>
                     Keterangan Warna User
                 </strong>
 
-                <small class="text-muted ml-2">
-                    Klik kotak warna untuk mengubah warna user.
-                </small>
-
-            </div>
-
-
-            <div class="card-body">
 
                 <div
                     id="userLegend"
@@ -126,7 +104,7 @@
                             {{-- ================================================= --}}
 
                             <span class="ml-2 font-weight-500">
-                            {{ $user->name }}
+                             {{ $user->name }}
                         </span>
 
                         </div>
@@ -134,10 +112,18 @@
                     @endforeach
 
                 </div>
-
+                <small class="text-muted ml-2">
+                    Klik kotak warna untuk mengubah warna user.
+                </small>
             </div>
 
         </div>
+
+
+        {{-- ========================================================= --}}
+        {{-- LEGEND USER --}}
+        {{-- ========================================================= --}}
+
 
     </div>
 
