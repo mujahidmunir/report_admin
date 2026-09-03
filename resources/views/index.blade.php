@@ -3,127 +3,345 @@
 @section('title', 'Jadwal Kerja')
 
 @section('content')
-    <div class="card border-0 border-start border-bottom border-5 radius-15 border-secondary">
-        <div class="card-header ">
-            <h3 class="mt-3 mb-3">Today Report</h3>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Action</th>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th width="10%" class="text-center">Link</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($reports as $key => $data)
-                        <tr>
-                            <td>{{$key+1}}</td>
-                            <td>{{$data->action ? $data->action->name : null}}</td>
-                            <td>{{$data->title}}</td>
-                            <td>{{$data->category->name}}</td>
-                            <td><a href="{{$data->link}}" target="_blank" class="btn btn-sm btn-primary d-grid">view</a> </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
 
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
+    <div class="work-schedule-page">
 
         {{-- ========================================================= --}}
-        {{-- HEADER --}}
+        {{-- PAGE HEADER --}}
         {{-- ========================================================= --}}
 
-        <div class="card shadow-sm border-0">
+        <div class="page-header-card mb-4">
 
-            <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="page-header-content">
+
+                <div class="page-header-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
 
                 <div>
-                    <h5 class="mb-0">
-                        <i class="fas fa-calendar-alt mr-2"></i>
+                    <h4 class="page-title">
                         Jadwal Kerja
-                    </h5>
+                    </h4>
 
-                    <small class="text-muted">
-                        Klik tanggal untuk menambah atau mengubah jadwal.
-                    </small>
+                    <p class="page-subtitle">
+                        Kelola jadwal kerja user melalui kalender secara mudah dan terorganisir.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- ========================================================= --}}
+        {{-- TODAY REPORT --}}
+        {{-- ========================================================= --}}
+
+        <div class="card schedule-card mb-4">
+
+            <div class="card-header schedule-card-header">
+
+                <div class="section-title-wrapper">
+
+                    <div class="section-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+
+                    <div>
+                        <h5 class="section-title">
+                            Today Report
+                        </h5>
+
+                        <small class="section-description">
+                            Laporan aktivitas hari ini
+                        </small>
+                    </div>
+
                 </div>
 
             </div>
 
 
-            {{-- ========================================================= --}}
-            {{-- CALENDAR --}}
-            {{-- ========================================================= --}}
+            <div class="card-body p-0">
 
-            <div class="card-body">
+                <div class="table-responsive">
 
-                <div id="workCalendar"></div>
-                <strong>
-                    <i class="fas fa-users mr-2"></i>
-                    Keterangan Warna User
-                </strong>
+                    <table
+                        id="example"
+                        class="table table-hover table-bordered align-middle mb-0"
+                    >
 
+                        <thead>
 
-                <div
-                    id="userLegend"
-                    class="d-flex flex-wrap"
-                    style="gap: 12px;"
-                >
+                        <tr>
 
-                    @foreach($users as $user)
+                            <th class="text-center" width="60">
+                                No
+                            </th>
 
-                        <div
-                            class="user-color-item d-flex align-items-center"
-                            data-user-id="{{ $user->id }}"
-                        >
+                            <th>
+                                Action
+                            </th>
 
-                            {{-- ================================================= --}}
-                            {{-- COLOR PICKER --}}
-                            {{-- ================================================= --}}
+                            <th>
+                                Title
+                            </th>
 
-                            <input
-                                type="color"
-                                class="user-color-picker"
-                                value="{{ $user->schedule_color ?: '#6c757d' }}"
-                                data-user-id="{{ $user->id }}"
-                                data-old-color="{{ $user->schedule_color ?: '#6c757d' }}"
-                                title="Ubah warna {{ $user->name }}"
+                            <th>
+                                Category
+                            </th>
+
+                            <th
+                                width="110"
+                                class="text-center"
                             >
+                                Link
+                            </th>
+
+                        </tr>
+
+                        </thead>
 
 
-                            {{-- ================================================= --}}
-                            {{-- USER NAME --}}
-                            {{-- ================================================= --}}
+                        <tbody>
 
-                            <span class="ml-2 font-weight-500">
-                             {{ $user->name }}
-                        </span>
+                        @foreach($reports as $key => $data)
+
+                            <tr>
+
+                                <td class="text-center">
+                                    {{ $key + 1 }}
+                                </td>
+
+
+                                <td>
+
+                                    @if($data->action)
+
+                                        <span class="report-action-badge">
+                                            {{ $data->action->name }}
+                                        </span>
+
+                                    @else
+
+                                        <span class="text-muted">
+                                            -
+                                        </span>
+
+                                    @endif
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="report-title">
+                                        {{ $data->title }}
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    @if($data->category)
+
+                                        <span class="report-category-badge">
+                                            {{ $data->category->name }}
+                                        </span>
+
+                                    @else
+
+                                        <span class="text-muted">
+                                            -
+                                        </span>
+
+                                    @endif
+
+                                </td>
+
+
+                                <td class="text-center">
+
+                                    <a
+                                        href="{{ $data->link }}"
+                                        target="_blank"
+                                        class="btn btn-sm btn-primary report-view-button"
+                                    >
+
+                                        <i class="fas fa-external-link-alt mr-1"></i>
+
+                                        View
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                        @endforeach
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- ========================================================= --}}
+        {{-- CALENDAR CARD --}}
+        {{-- ========================================================= --}}
+
+        <div class="card schedule-card">
+
+            {{-- ===================================================== --}}
+            {{-- CARD HEADER --}}
+            {{-- ===================================================== --}}
+
+            <div class="card-header schedule-card-header calendar-header">
+
+                <div class="section-title-wrapper">
+
+                    <div class="section-icon calendar-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+
+                    <div>
+
+                        <h5 class="section-title">
+                            Jadwal Kerja
+                        </h5>
+
+                        <small class="section-description">
+                            Klik tanggal pada kalender untuk menambah atau mengubah jadwal.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{-- ===================================================== --}}
+            {{-- CALENDAR BODY --}}
+            {{-- ===================================================== --}}
+
+            <div class="card-body calendar-body">
+
+                <div class="calendar-layout">
+
+                    {{-- ================================================= --}}
+                    {{-- CALENDAR --}}
+                    {{-- ================================================= --}}
+
+                    <div class="calendar-main">
+
+                        <div id="workCalendar"></div>
+
+                    </div>
+
+
+                    {{-- ================================================= --}}
+                    {{-- USER LEGEND --}}
+                    {{-- ================================================= --}}
+
+                    <div class="calendar-sidebar">
+
+                        <div class="calendar-sidebar-header">
+
+                            <div class="legend-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+
+                            <div>
+
+                                <h6 class="legend-title">
+                                    Keterangan User
+                                </h6>
+
+                                <small class="legend-description">
+                                    Warna menunjukkan user yang memiliki jadwal kerja.
+                                </small>
+
+                            </div>
 
                         </div>
 
-                    @endforeach
+
+                        {{-- ================================================= --}}
+                        {{-- USER LIST --}}
+                        {{-- ================================================= --}}
+
+                        <div
+                            id="userLegend"
+                            class="user-legend-list"
+                        >
+
+                            @foreach($users as $user)
+
+                                <div
+                                    class="user-legend-item"
+                                    data-user-id="{{ $user->id }}"
+                                >
+
+                                    {{-- COLOR PICKER --}}
+
+                                    <input
+                                        type="color"
+                                        class="user-color-picker"
+                                        value="{{ $user->schedule_color ?: '#6c757d' }}"
+                                        data-user-id="{{ $user->id }}"
+                                        data-old-color="{{ $user->schedule_color ?: '#6c757d' }}"
+                                        title="Ubah warna {{ $user->name }}"
+                                    >
+
+
+                                    {{-- USER INFO --}}
+
+                                    <div class="user-legend-info">
+
+                            <span class="user-name">
+                                {{ $user->name }}
+                            </span>
+
+                                        <span class="user-color-code">
+                                {{ strtoupper($user->schedule_color ?: '#6c757d') }}
+                            </span>
+
+                                    </div>
+
+                                </div>
+
+                            @endforeach
+
+                        </div>
+
+
+                        {{-- ================================================= --}}
+                        {{-- HELP --}}
+                        {{-- ================================================= --}}
+
+                        <div class="legend-help-box">
+
+                            <i class="fas fa-info-circle"></i>
+
+                            <span>
+                    Klik kotak warna untuk mengubah warna user.
+                </span>
+
+                        </div>
+
+                    </div>
 
                 </div>
-                <small class="text-muted ml-2">
-                    Klik kotak warna untuk mengubah warna user.
-                </small>
+
             </div>
-
         </div>
-
-
-        {{-- ========================================================= --}}
-        {{-- LEGEND USER --}}
-        {{-- ========================================================= --}}
-
 
     </div>
 
@@ -142,40 +360,54 @@
     >
 
         <div
-            class="modal-dialog modal-dialog-centered"
+            class="modal-dialog modal-dialog-centered modal-lg"
             role="document"
         >
 
-            <div class="modal-content">
+            <div class="modal-content schedule-modal">
 
                 {{-- ================================================= --}}
                 {{-- MODAL HEADER --}}
                 {{-- ================================================= --}}
 
-                <div class="modal-header">
+                <div class="modal-header schedule-modal-header">
 
-                    <h5
-                        class="modal-title"
-                        id="scheduleModalLabel"
-                    >
+                    <div class="modal-title-wrapper">
 
-                        <i class="fas fa-calendar-check mr-2"></i>
+                        <div class="modal-icon">
 
-                        Jadwal Kerja
+                            <i class="fas fa-calendar-check"></i>
 
-                    </h5>
+                        </div>
+
+                        <div>
+
+                            <h5
+                                class="modal-title"
+                                id="scheduleModalLabel"
+                            >
+                                Jadwal Kerja
+                            </h5>
+
+                            <small>
+                                Atur user yang masuk kerja
+                            </small>
+
+                        </div>
+
+                    </div>
 
 
                     <button
                         type="button"
-                        class="close"
+                        class="close schedule-close"
                         data-dismiss="modal"
                         aria-label="Close"
                     >
 
-                    <span aria-hidden="true">
-                        &times;
-                    </span>
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
 
                     </button>
 
@@ -191,27 +423,41 @@
                     autocomplete="off"
                 >
 
-                    <div class="modal-body">
+                    <div class="modal-body schedule-modal-body">
 
-                        {{-- ================================================= --}}
-                        {{-- TANGGAL --}}
-                        {{-- ================================================= --}}
+                        {{-- ========================================= --}}
+                        {{-- DATE --}}
+                        {{-- ========================================= --}}
 
                         <div class="form-group">
 
-                            <label for="scheduleDateDisplay">
+                            <label
+                                for="scheduleDateDisplay"
+                                class="form-label-custom"
+                            >
+
+                                <i class="far fa-calendar mr-1"></i>
 
                                 Tanggal
 
                             </label>
 
 
-                            <input
-                                type="text"
-                                id="scheduleDateDisplay"
-                                class="form-control"
-                                readonly
-                            >
+                            <div class="date-input-wrapper">
+
+                                <span class="date-input-icon">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+
+
+                                <input
+                                    type="text"
+                                    id="scheduleDateDisplay"
+                                    class="form-control schedule-date-input"
+                                    readonly
+                                >
+
+                            </div>
 
 
                             <input
@@ -223,19 +469,24 @@
                         </div>
 
 
-                        {{-- ================================================= --}}
+                        {{-- ========================================= --}}
                         {{-- USER --}}
-                        {{-- ================================================= --}}
+                        {{-- ========================================= --}}
 
-                        <div class="form-group">
+                        <div class="form-group mt-4">
 
-                            <label for="userIds">
+                            <label
+                                for="userIds"
+                                class="form-label-custom"
+                            >
+
+                                <i class="fas fa-users mr-1"></i>
 
                                 User yang masuk kerja
 
                                 <span class="text-danger">
-                                *
-                            </span>
+                                    *
+                                </span>
 
                             </label>
 
@@ -253,7 +504,9 @@
                                     <option
                                         value="{{ $user->id }}"
                                     >
+
                                         {{ $user->name }}
+
                                     </option>
 
                                 @endforeach
@@ -261,23 +514,26 @@
                             </select>
 
 
-                            <small class="text-muted">
+                            <div class="form-helper">
 
-                                Anda dapat memilih beberapa user.
+                                <i class="fas fa-info-circle mr-1"></i>
 
-                            </small>
+                                Pilih satu atau beberapa user yang masuk kerja.
+
+                            </div>
 
                         </div>
 
 
-                        {{-- ================================================= --}}
-                        {{-- INFO JADWAL --}}
-                        {{-- ================================================= --}}
+                        {{-- ========================================= --}}
+                        {{-- INFO --}}
+                        {{-- ========================================= --}}
 
                         <div
                             id="scheduleInfo"
-                            class="alert alert-info d-none"
+                            class="schedule-info d-none"
                         >
+
                         </div>
 
                     </div>
@@ -287,28 +543,24 @@
                     {{-- FOOTER --}}
                     {{-- ================================================= --}}
 
-                    <div class="modal-footer">
-
-                        {{-- DELETE --}}
+                    <div class="modal-footer schedule-modal-footer">
 
                         <button
                             type="button"
-                            class="btn btn-danger mr-auto d-none"
+                            class="btn btn-danger schedule-delete-button mr-auto d-none"
                             id="btnDeleteSchedule"
                         >
 
-                            <i class="fas fa-trash mr-1"></i>
+                            <i class="fas fa-trash-alt mr-1"></i>
 
                             Hapus Jadwal
 
                         </button>
 
 
-                        {{-- CANCEL --}}
-
                         <button
                             type="button"
-                            class="btn btn-secondary"
+                            class="btn btn-light schedule-cancel-button"
                             data-dismiss="modal"
                         >
 
@@ -319,19 +571,17 @@
                         </button>
 
 
-                        {{-- SAVE --}}
-
                         <button
                             type="submit"
-                            class="btn btn-primary"
+                            class="btn btn-primary schedule-save-button"
                             id="btnSaveSchedule"
                         >
 
                             <i class="fas fa-save mr-1"></i>
 
                             <span id="btnSaveText">
-                            Simpan Jadwal
-                        </span>
+                                Simpan Jadwal
+                            </span>
 
                         </button>
 
@@ -369,12 +619,48 @@
 
 
     <style>
+        /* =========================================================
+           CALENDAR LAYOUT
+        ========================================================= */
 
-        /*
-        |--------------------------------------------------------------------------
-        | CALENDAR
-        |--------------------------------------------------------------------------
-        */
+        .calendar-body {
+
+            padding: 22px !important;
+
+        }
+
+
+        .calendar-layout {
+
+            display: grid;
+
+            grid-template-columns:
+        minmax(0, 1fr)
+        260px;
+
+            gap: 22px;
+
+            align-items: stretch;
+
+        }
+
+
+        /* =========================================================
+           CALENDAR MAIN
+        ========================================================= */
+
+        .calendar-main {
+
+            min-width: 0;
+
+            background: #fff;
+
+        }
+
+
+        /* =========================================================
+           CALENDAR
+        ========================================================= */
 
         #workCalendar {
 
@@ -383,13 +669,170 @@
         }
 
 
+        .fc {
+
+            font-family: inherit;
+
+        }
+
+
+        .fc .fc-toolbar {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .fc .fc-toolbar-title {
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            color: #252b3b;
+
+        }
+
+
+        .fc .fc-button {
+
+            border-radius: 7px !important;
+
+            border: 0 !important;
+
+            box-shadow: none !important;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            padding: 7px 12px;
+
+        }
+
+
+        .fc .fc-button-primary {
+
+            background: #0d6efd;
+
+        }
+
+
+        .fc .fc-button-primary:hover {
+
+            background: #0b5ed7;
+
+        }
+
+
+        .fc .fc-button-primary:disabled {
+
+            background: #adb5bd;
+
+            opacity: .8;
+
+        }
+
+
+        .fc .fc-daygrid-day {
+
+            transition: background .2s ease;
+
+        }
+
+
+        .fc .fc-daygrid-day:hover {
+
+            background: #f8faff;
+
+        }
+
+
+        .fc .fc-col-header-cell {
+
+            background: #f8f9fc;
+
+            padding: 9px 0;
+
+        }
+
+
+        .fc .fc-col-header-cell-cushion {
+
+            color: #697386;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+        }
+
+
+        .fc .fc-daygrid-day-number {
+
+            color: #596275;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            padding: 8px;
+
+            text-decoration: none;
+
+        }
+
+
+        .fc .fc-day-today {
+
+            background: rgba(13, 110, 253, .05) !important;
+
+        }
+
+
+        .fc .fc-day-today .fc-daygrid-day-number {
+
+            background: #0d6efd;
+
+            color: #fff;
+
+            width: 27px;
+
+            height: 27px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            margin: 4px;
+
+            padding: 0;
+
+        }
+
+
         .fc-event {
 
             cursor: pointer;
 
-            border-radius: 5px;
+            border: 0 !important;
 
-            padding: 2px 5px;
+            border-radius: 5px !important;
+
+            padding: 3px 6px !important;
+
+            margin: 2px 4px !important;
+
+            font-size: 11px;
+
+            box-shadow:
+                0 1px 3px rgba(0, 0, 0, .08);
 
         }
 
@@ -401,18 +844,1193 @@
         }
 
 
-        .fc-daygrid-day {
+        /* =========================================================
+           CALENDAR SIDEBAR
+        ========================================================= */
 
-            cursor: pointer;
+        .calendar-sidebar {
+
+            border-left: 1px solid #edf0f5;
+
+            padding-left: 20px;
+
+            min-height: 100%;
 
         }
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | SELECT2
-        |--------------------------------------------------------------------------
-        */
+        /* =========================================================
+           SIDEBAR HEADER
+        ========================================================= */
+
+        .calendar-sidebar-header {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 15px;
+
+            border-bottom: 1px solid #edf0f5;
+
+        }
+
+
+        .legend-icon {
+
+            width: 36px;
+
+            height: 36px;
+
+            min-width: 36px;
+
+            border-radius: 9px;
+
+            background: #f1f5f9;
+
+            color: #64748b;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 14px;
+
+        }
+
+
+        .legend-title {
+
+            margin: 0;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #344054;
+
+        }
+
+
+        .legend-description {
+
+            display: block;
+
+            color: #98a2b3;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+
+            margin-top: 3px;
+
+        }
+
+
+        /* =========================================================
+           USER LIST
+        ========================================================= */
+
+        .user-legend-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+
+        }
+
+
+        .user-legend-item {
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 9px 10px;
+
+            background: #f8fafc;
+
+            border: 1px solid #edf0f5;
+
+            border-radius: 9px;
+
+            transition: all .2s ease;
+
+        }
+
+
+        .user-legend-item:hover {
+
+            background: #fff;
+
+            border-color: #d8dee9;
+
+            box-shadow:
+                0 3px 10px rgba(0, 0, 0, .05);
+
+        }
+
+
+        /* =========================================================
+           COLOR PICKER
+        ========================================================= */
+
+        .user-color-picker {
+
+            width: 34px;
+
+            height: 34px;
+
+            padding: 2px;
+
+            border: 1px solid #d0d5dd;
+
+            border-radius: 7px;
+
+            background: #fff;
+
+            cursor: pointer;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .user-color-picker::-webkit-color-swatch-wrapper {
+
+            padding: 0;
+
+        }
+
+
+        .user-color-picker::-webkit-color-swatch {
+
+            border: 0;
+
+            border-radius: 5px;
+
+        }
+
+
+        .user-color-picker:disabled {
+
+            opacity: .5;
+
+            cursor: wait;
+
+        }
+
+
+        /* =========================================================
+           USER INFO
+        ========================================================= */
+
+        .user-legend-info {
+
+            display: flex;
+
+            flex-direction: column;
+
+            margin-left: 10px;
+
+            min-width: 0;
+
+        }
+
+
+        .user-name {
+
+            color: #344054;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .user-color-code {
+
+            color: #98a2b3;
+
+            font-size: 9px;
+
+            margin-top: 2px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        /* =========================================================
+           HELP BOX
+        ========================================================= */
+
+        .legend-help-box {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 7px;
+
+            margin-top: 15px;
+
+            padding: 10px;
+
+            background: #f8f9fc;
+
+            border: 1px dashed #dfe3e8;
+
+            border-radius: 7px;
+
+            color: #98a2b3;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .legend-help-box i {
+
+            margin-top: 1px;
+
+            color: #0d6efd;
+
+        }
+        /* =========================================================
+           GENERAL
+        ========================================================= */
+
+        .work-schedule-page {
+
+            width: 100%;
+
+        }
+
+
+        .schedule-card {
+
+            border: 0 !important;
+
+            border-radius: 15px !important;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, .06);
+
+            background: #fff;
+
+        }
+
+
+        /* =========================================================
+           PAGE HEADER
+        ========================================================= */
+
+        .page-header-card {
+
+            border-radius: 15px;
+
+            padding: 22px 25px;
+
+            background: linear-gradient(
+                135deg,
+                #ffffff 0%,
+                #f8faff 100%
+            );
+
+            border: 1px solid #edf0f5;
+
+            box-shadow:
+                0 4px 18px rgba(0, 0, 0, .04);
+
+        }
+
+
+        .page-header-content {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .page-header-icon {
+
+            width: 50px;
+
+            height: 50px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: rgba(13, 110, 253, .10);
+
+            color: #0d6efd;
+
+            font-size: 21px;
+
+        }
+
+
+        .page-title {
+
+            margin: 0;
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            color: #252b3b;
+
+        }
+
+
+        .page-subtitle {
+
+            margin: 4px 0 0;
+
+            color: #8a92a6;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================================================
+           CARD HEADER
+        ========================================================= */
+
+        .schedule-card-header {
+
+            background: #fff;
+
+            border-bottom: 1px solid #edf0f5 !important;
+
+            padding: 18px 22px;
+
+        }
+
+
+        .section-title-wrapper {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .section-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: rgba(13, 110, 253, .10);
+
+            color: #0d6efd;
+
+        }
+
+
+        .calendar-icon {
+
+            background: rgba(25, 135, 84, .10);
+
+            color: #198754;
+
+        }
+
+
+        .section-title {
+
+            margin: 0;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            color: #252b3b;
+
+        }
+
+
+        .section-description {
+
+            display: block;
+
+            margin-top: 2px;
+
+            color: #969daf;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================================
+           TABLE
+        ========================================================= */
+
+        #example {
+
+            margin-bottom: 0 !important;
+
+        }
+
+
+        #example thead th {
+
+            background: #f8f9fc;
+
+            color: #596275;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .3px;
+
+            border-color: #edf0f5;
+
+            padding: 13px 12px;
+
+            vertical-align: middle;
+
+        }
+
+
+        #example tbody td {
+
+            padding: 12px;
+
+            font-size: 13px;
+
+            color: #596275;
+
+            border-color: #edf0f5;
+
+            vertical-align: middle;
+
+        }
+
+
+        #example tbody tr {
+
+            transition: .2s ease;
+
+        }
+
+
+        #example tbody tr:hover {
+
+            background: #f8faff;
+
+        }
+
+
+        .report-title {
+
+            font-weight: 600;
+
+            color: #343a40;
+
+        }
+
+
+        .report-action-badge {
+
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 6px;
+
+            background: #eef4ff;
+
+            color: #0d6efd;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        .report-category-badge {
+
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 6px;
+
+            background: #f2f4f7;
+
+            color: #667085;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        .report-view-button {
+
+            min-width: 75px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================================
+           CALENDAR
+        ========================================================= */
+
+        .calendar-body {
+
+            padding: 22px !important;
+
+        }
+
+
+        .calendar-wrapper {
+
+            width: 100%;
+
+            background: #fff;
+
+        }
+
+
+        #workCalendar {
+
+            min-height: 650px;
+
+        }
+
+
+        .fc {
+
+            font-family: inherit;
+
+        }
+
+
+        .fc .fc-toolbar {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .fc .fc-toolbar-title {
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            color: #252b3b;
+
+        }
+
+
+        .fc .fc-button {
+
+            border-radius: 7px !important;
+
+            border: 0 !important;
+
+            box-shadow: none !important;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            padding: 7px 12px;
+
+        }
+
+
+        .fc .fc-button-primary {
+
+            background: #0d6efd;
+
+        }
+
+
+        .fc .fc-button-primary:hover {
+
+            background: #0b5ed7;
+
+        }
+
+
+        .fc .fc-button-primary:disabled {
+
+            background: #adb5bd;
+
+            opacity: .8;
+
+        }
+
+
+        .fc .fc-daygrid-day {
+
+            transition: background .2s ease;
+
+        }
+
+
+        .fc .fc-daygrid-day:hover {
+
+            background: #f8faff;
+
+        }
+
+
+        .fc .fc-col-header-cell {
+
+            background: #f8f9fc;
+
+            padding: 9px 0;
+
+        }
+
+
+        .fc .fc-col-header-cell-cushion {
+
+            color: #697386;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+        }
+
+
+        .fc .fc-daygrid-day-number {
+
+            color: #596275;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            padding: 8px;
+
+            text-decoration: none;
+
+        }
+
+
+        .fc .fc-day-today {
+
+            background: rgba(13, 110, 253, .05) !important;
+
+        }
+
+
+        .fc .fc-day-today .fc-daygrid-day-number {
+
+            background: #0d6efd;
+
+            color: #fff;
+
+            width: 27px;
+
+            height: 27px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            margin: 4px;
+
+            padding: 0;
+
+        }
+
+
+        .fc-event {
+
+            cursor: pointer;
+
+            border: 0 !important;
+
+            border-radius: 5px !important;
+
+            padding: 3px 6px !important;
+
+            margin: 2px 4px !important;
+
+            font-size: 11px;
+
+            box-shadow:
+                0 1px 3px rgba(0, 0, 0, .08);
+
+        }
+
+
+        .fc-event-title {
+
+            font-weight: 600;
+
+        }
+
+
+        /* =========================================================
+           USER LEGEND
+        ========================================================= */
+
+        .user-legend-section {
+
+            padding-top: 20px;
+
+            border-top: 1px solid #edf0f5;
+
+        }
+
+
+        .legend-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .legend-title-wrapper {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .legend-icon {
+
+            width: 34px;
+
+            height: 34px;
+
+            border-radius: 8px;
+
+            background: #f1f5f9;
+
+            color: #64748b;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 13px;
+
+        }
+
+
+        .legend-title {
+
+            margin: 0;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #344054;
+
+        }
+
+
+        .legend-description {
+
+            color: #98a2b3;
+
+            font-size: 11px;
+
+        }
+
+
+        .legend-help {
+
+            font-size: 11px;
+
+            color: #98a2b3;
+
+            white-space: nowrap;
+
+        }
+
+
+        .user-legend-list {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+        }
+
+
+        .user-legend-item {
+
+            display: flex;
+
+            align-items: center;
+
+            min-width: 170px;
+
+            padding: 8px 11px;
+
+            background: #f8fafc;
+
+            border: 1px solid #edf0f5;
+
+            border-radius: 9px;
+
+            transition: all .2s ease;
+
+        }
+
+
+        .user-legend-item:hover {
+
+            background: #fff;
+
+            border-color: #d8dee9;
+
+            box-shadow:
+                0 3px 10px rgba(0, 0, 0, .05);
+
+        }
+
+
+        .user-color-picker {
+
+            width: 31px;
+
+            height: 31px;
+
+            padding: 2px;
+
+            border: 1px solid #d0d5dd;
+
+            border-radius: 7px;
+
+            background: #fff;
+
+            cursor: pointer;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .user-color-picker::-webkit-color-swatch-wrapper {
+
+            padding: 0;
+
+        }
+
+
+        .user-color-picker::-webkit-color-swatch {
+
+            border: 0;
+
+            border-radius: 5px;
+
+        }
+
+
+        .user-legend-info {
+
+            display: flex;
+
+            flex-direction: column;
+
+            margin-left: 9px;
+
+            min-width: 0;
+
+        }
+
+
+        .user-name {
+
+            color: #344054;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            max-width: 120px;
+
+        }
+
+
+        .user-color-code {
+
+            color: #98a2b3;
+
+            font-size: 9px;
+
+            margin-top: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        .schedule-modal {
+
+            border: 0;
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 15px 50px rgba(0, 0, 0, .15);
+
+        }
+
+
+        .schedule-modal-header {
+
+            background: #f8faff;
+
+            border-bottom: 1px solid #edf0f5;
+
+            padding: 17px 20px;
+
+        }
+
+
+        .modal-title-wrapper {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+        }
+
+
+        .modal-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 10px;
+
+            background: rgba(13, 110, 253, .10);
+
+            color: #0d6efd;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .schedule-modal-header .modal-title {
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            color: #252b3b;
+
+        }
+
+
+        .schedule-modal-header small {
+
+            display: block;
+
+            color: #98a2b3;
+
+            font-size: 11px;
+
+            margin-top: 2px;
+
+        }
+
+
+        .schedule-close {
+
+            font-size: 23px;
+
+            color: #667085;
+
+            opacity: .7;
+
+            outline: none !important;
+
+        }
+
+
+        .schedule-close:hover {
+
+            opacity: 1;
+
+        }
+
+
+        .schedule-modal-body {
+
+            padding: 23px;
+
+        }
+
+
+        .form-label-custom {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #344054;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .date-input-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .date-input-icon {
+
+            position: absolute;
+
+            left: 12px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #98a2b3;
+
+            z-index: 2;
+
+        }
+
+
+        .schedule-date-input {
+
+            height: 40px;
+
+            padding-left: 37px;
+
+            background: #f8fafc !important;
+
+            border-color: #e4e7ec;
+
+            color: #344054;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        .schedule-date-input:focus {
+
+            box-shadow: none;
+
+            border-color: #98a2b3;
+
+        }
+
+
+        /* =========================================================
+           SELECT2
+        ========================================================= */
 
         .select2-container {
 
@@ -424,13 +2042,23 @@
         .select2-container--default
         .select2-selection--multiple {
 
-            min-height: 38px;
+            min-height: 42px;
 
-            border: 1px solid #ced4da;
+            border: 1px solid #d0d5dd;
 
-            border-radius: .25rem;
+            border-radius: 7px;
 
-            padding-bottom: 3px;
+            padding: 3px 5px;
+
+            transition: border .2s ease;
+
+        }
+
+
+        .select2-container--default
+        .select2-selection--multiple:focus {
+
+            border-color: #86b7fe;
 
         }
 
@@ -439,126 +2067,331 @@
         .select2-selection--multiple
         .select2-selection__choice {
 
-            margin-top: 5px;
+            margin-top: 4px;
 
-        }
+            background: #eef4ff;
 
+            border: 1px solid #d8e5ff;
 
-        /*
-        |--------------------------------------------------------------------------
-        | USER COLOR
-        |--------------------------------------------------------------------------
-        */
-
-        .user-color-item {
-
-            display: flex;
-
-            align-items: center;
-
-            padding: 7px 10px;
-
-            border: 1px solid #e5e5e5;
-
-            border-radius: 6px;
-
-            background: #ffffff;
-
-            transition: all .2s ease;
-
-        }
-
-
-        .user-color-item:hover {
-
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
-
-        }
-
-
-        .user-color-picker {
-
-            width: 38px;
-
-            height: 32px;
-
-            padding: 2px;
-
-            border: 1px solid #ced4da;
+            color: #0d6efd;
 
             border-radius: 5px;
 
-            cursor: pointer;
-
-            background: #ffffff;
-
-        }
-
-
-        .user-color-picker:disabled {
-
-            cursor: wait;
-
-            opacity: .5;
-
-        }
-
-
-        .font-weight-500 {
-
-            font-weight: 500;
-
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | MODAL
-        |--------------------------------------------------------------------------
-        */
-
-        #scheduleModal .modal-header {
-
-            background: #f8f9fa;
-
-        }
-
-
-        #scheduleModal .modal-title {
+            font-size: 11px;
 
             font-weight: 600;
 
-        }
-
-
-        #scheduleInfo {
-
-            margin-bottom: 0;
+            padding: 3px 7px;
 
         }
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | FULLCALENDAR HEADER
-        |--------------------------------------------------------------------------
-        */
+        .select2-container--default
+        .select2-selection--multiple
+        .select2-selection__choice__remove {
 
-        .fc .fc-toolbar-title {
+            color: #0d6efd;
 
-            font-size: 1.25rem;
+            margin-right: 4px;
+
+            border-right: 0;
+
+        }
+
+
+        .select2-dropdown {
+
+            border-color: #d0d5dd;
+
+            border-radius: 7px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, .08);
+
+        }
+
+
+        .select2-results__option {
+
+            font-size: 12px;
+
+            padding: 8px 10px;
+
+        }
+
+
+        .select2-results__option--highlighted {
+
+            background: #0d6efd !important;
+
+        }
+
+
+        .form-helper {
+
+            margin-top: 7px;
+
+            color: #98a2b3;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =========================================================
+           INFO
+        ========================================================= */
+
+        .schedule-info {
+
+            margin-top: 18px;
+
+            padding: 11px 13px;
+
+            background: #eff6ff;
+
+            border: 1px solid #dbeafe;
+
+            border-radius: 7px;
+
+            color: #1d4ed8;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================================
+           MODAL FOOTER
+        ========================================================= */
+
+        .schedule-modal-footer {
+
+            background: #fafbfc;
+
+            border-top: 1px solid #edf0f5;
+
+            padding: 13px 20px;
+
+        }
+
+
+        .schedule-modal-footer .btn {
+
+            border-radius: 7px;
+
+            font-size: 12px;
 
             font-weight: 600;
 
-        }
-
-
-        .fc .fc-button {
-
-            border-radius: 4px;
+            padding: 8px 14px;
 
         }
 
+
+        .schedule-cancel-button {
+
+            border: 1px solid #d0d5dd;
+
+            color: #667085;
+
+            background: #fff;
+
+        }
+
+
+        .schedule-save-button {
+
+            min-width: 125px;
+
+        }
+
+
+        .schedule-delete-button {
+
+            min-width: 120px;
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 768px) {
+
+            .page-header-card {
+
+                padding: 17px;
+
+            }
+
+
+            .page-title {
+
+                font-size: 18px;
+
+            }
+
+
+            .page-subtitle {
+
+                font-size: 11px;
+
+            }
+
+
+            .calendar-body {
+
+                padding: 12px !important;
+
+            }
+
+
+            .fc .fc-toolbar {
+
+                display: flex;
+
+                flex-wrap: wrap;
+
+                gap: 8px;
+
+            }
+
+
+            .fc .fc-toolbar-title {
+
+                font-size: 16px;
+
+            }
+
+
+            .fc .fc-toolbar-chunk {
+
+                display: flex;
+
+                align-items: center;
+
+            }
+
+
+            .legend-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+
+            .legend-help {
+
+                white-space: normal;
+
+            }
+
+
+            .user-legend-item {
+
+                min-width: 150px;
+
+                flex: 1;
+
+            }
+
+
+            #workCalendar {
+
+                min-height: 500px;
+
+            }
+
+        }
+
+
+        @media (max-width: 576px) {
+
+            .schedule-card-header {
+
+                padding: 15px;
+
+            }
+
+
+            .section-description {
+
+                display: none;
+
+            }
+
+
+            .calendar-body {
+
+                padding: 8px !important;
+
+            }
+
+
+            .user-legend-list {
+
+                display: grid;
+
+                grid-template-columns: repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+                gap: 7px;
+
+            }
+
+
+            .user-legend-item {
+
+                min-width: 0;
+
+            }
+
+
+            .user-name {
+
+                max-width: 85px;
+
+            }
+
+
+            .fc .fc-toolbar-title {
+
+                font-size: 14px;
+
+            }
+
+
+            .fc .fc-button {
+
+                padding: 5px 8px;
+
+                font-size: 10px;
+
+            }
+
+
+            .schedule-modal-body {
+
+                padding: 17px;
+
+            }
+
+
+            .schedule-modal-footer {
+
+                flex-wrap: wrap;
+
+            }
+
+        }
 
     </style>
 
@@ -573,7 +2406,6 @@
 
     {{-- ============================================================= --}}
     {{-- SWEETALERT2 --}}
-    {{-- HARUS DIMUAT SEBELUM KODE YANG MENGGUNAKAN Swal --}}
     {{-- ============================================================= --}}
 
     <script
@@ -618,7 +2450,7 @@
 
             /*
             |--------------------------------------------------------------------------
-            | CEK DEPENDENCY
+            | DEPENDENCY CHECK
             |--------------------------------------------------------------------------
             */
 
@@ -695,7 +2527,9 @@
             {
 
                 if (!dateString) {
+
                     return '';
+
                 }
 
 
@@ -856,12 +2690,6 @@
                             });
 
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | SET SELECT2
-                        |--------------------------------------------------------------------------
-                        */
-
                         $('#userIds')
                             .val(userIds)
                             .trigger('change')
@@ -870,7 +2698,7 @@
 
                         /*
                         |--------------------------------------------------------------------------
-                        | SUDAH ADA JADWAL
+                        | EXISTING SCHEDULE
                         |--------------------------------------------------------------------------
                         */
 
@@ -890,6 +2718,7 @@
                             $('#scheduleInfo')
                                 .removeClass('d-none')
                                 .html(
+                                    '<i class="fas fa-check-circle mr-1"></i>' +
                                     '<strong>' +
                                     userIds.length +
                                     '</strong> user sudah dijadwalkan pada tanggal ini.'
@@ -900,7 +2729,7 @@
 
                         /*
                         |--------------------------------------------------------------------------
-                        | BELUM ADA JADWAL
+                        | NEW SCHEDULE
                         |--------------------------------------------------------------------------
                         */
 
@@ -975,12 +2804,6 @@
                     }
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | VALIDATION ERROR
-                    |--------------------------------------------------------------------------
-                    */
-
                     if (xhr.responseJSON.errors) {
 
                         let html = '';
@@ -1022,7 +2845,7 @@
                         'error',
 
                     title:
-                        'Error',
+                        'Terjadi Kesalahan',
 
                     html:
                     message
@@ -1034,7 +2857,7 @@
 
             /*
             |--------------------------------------------------------------------------
-            | INIT FULLCALENDAR
+            | FULLCALENDAR
             |--------------------------------------------------------------------------
             */
 
@@ -1063,24 +2886,15 @@
                         locale:
                             'id',
 
-
                         initialView:
                             'dayGridMonth',
-
 
                         height:
                             'auto',
 
-
                         firstDay:
                             1,
 
-
-                        /*
-                        |--------------------------------------------------------------------------
-                        | HEADER
-                        |--------------------------------------------------------------------------
-                        */
 
                         headerToolbar: {
 
@@ -1110,12 +2924,6 @@
                         },
 
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | EVENT
-                        |--------------------------------------------------------------------------
-                        */
-
                         events: {
 
                             url:
@@ -1134,7 +2942,7 @@
                                         'error',
 
                                     title:
-                                        'Error',
+                                        'Gagal',
 
                                     text:
                                         'Gagal mengambil data jadwal.'
@@ -1146,12 +2954,6 @@
                         },
 
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | KLIK TANGGAL
-                        |--------------------------------------------------------------------------
-                        */
-
                         dateClick:
                             function (info)
                             {
@@ -1162,12 +2964,6 @@
 
                             },
 
-
-                        /*
-                        |--------------------------------------------------------------------------
-                        | KLIK EVENT
-                        |--------------------------------------------------------------------------
-                        */
 
                         eventClick:
                             function (info)
@@ -1185,12 +2981,6 @@
 
                             },
 
-
-                        /*
-                        |--------------------------------------------------------------------------
-                        | EVENT CONTENT
-                        |--------------------------------------------------------------------------
-                        */
 
                         eventContent:
                             function (arg)
@@ -1258,7 +3048,7 @@
 
             /*
             |--------------------------------------------------------------------------
-            | SAVE / UPDATE JADWAL
+            | SAVE / UPDATE
             |--------------------------------------------------------------------------
             */
 
@@ -1280,12 +3070,6 @@
                             .val();
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | VALIDASI TANGGAL
-                    |--------------------------------------------------------------------------
-                    */
-
                     if (!date) {
 
                         Swal.fire({
@@ -1305,12 +3089,6 @@
 
                     }
 
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | VALIDASI USER
-                    |--------------------------------------------------------------------------
-                    */
 
                     if (
                         !userIds ||
@@ -1335,23 +3113,11 @@
                     }
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | URL
-                    |--------------------------------------------------------------------------
-                    */
-
                     const url =
                         isEdit
                             ? "{{ route('work-schedules.update') }}"
                             : "{{ route('work-schedules.store') }}";
 
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | DATA
-                    |--------------------------------------------------------------------------
-                    */
 
                     const data = {
 
@@ -1364,15 +3130,6 @@
                     };
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | UPDATE
-                    |--------------------------------------------------------------------------
-                    |
-                    | POST + _method=PUT
-                    |
-                    */
-
                     if (isEdit) {
 
                         data._method =
@@ -1381,14 +3138,11 @@
                     }
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | DISABLE BUTTON
-                    |--------------------------------------------------------------------------
-                    */
-
                     $('#btnSaveSchedule')
-                        .prop('disabled', true);
+                        .prop(
+                            'disabled',
+                            true
+                        );
 
 
                     $.ajax({
@@ -1410,12 +3164,6 @@
                                 $('#scheduleModal')
                                     .modal('hide');
 
-
-                                /*
-                                |--------------------------------------------------------------------------
-                                | REFRESH CALENDAR
-                                |--------------------------------------------------------------------------
-                                */
 
                                 calendar
                                     .refetchEvents();
@@ -1460,7 +3208,10 @@
                             {
 
                                 $('#btnSaveSchedule')
-                                    .prop('disabled', false);
+                                    .prop(
+                                        'disabled',
+                                        false
+                                    );
 
                             }
 
@@ -1472,7 +3223,7 @@
 
             /*
             |--------------------------------------------------------------------------
-            | DELETE SEMUA JADWAL BERDASARKAN TANGGAL
+            | DELETE BY DATE
             |--------------------------------------------------------------------------
             */
 
@@ -1509,7 +3260,7 @@
                             true,
 
                         confirmButtonText:
-                            'Ya, Hapus',
+                            '<i class="fas fa-trash mr-1"></i> Ya, Hapus',
 
                         cancelButtonText:
                             'Batal',
@@ -1541,12 +3292,6 @@
 
                                 url:
                                     "{{ route('work-schedules.destroy-by-date') }}",
-
-                                /*
-                                |--------------------------------------------------------------------------
-                                | POST + _method=DELETE
-                                |--------------------------------------------------------------------------
-                                */
 
                                 type:
                                     'POST',
@@ -1631,7 +3376,7 @@
 
             /*
             |--------------------------------------------------------------------------
-            | UPDATE WARNA USER
+            | UPDATE USER COLOR
             |--------------------------------------------------------------------------
             */
 
@@ -1660,21 +3405,15 @@
                         );
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | KONFIRMASI
-                    |--------------------------------------------------------------------------
-                    */
-
                     Swal.fire({
 
                         title:
                             'Ubah Warna User?',
 
                         html:
-                            'Warna jadwal user akan diubah menjadi<br>' +
+                            'Warna jadwal akan diubah menjadi<br>' +
                             '<strong>' +
-                            newColor +
+                            newColor.toUpperCase() +
                             '</strong>',
 
                         icon:
@@ -1695,12 +3434,6 @@
                     }).then(
                         function (result)
                         {
-
-                            /*
-                            |--------------------------------------------------------------------------
-                            | BATAL
-                            |--------------------------------------------------------------------------
-                            */
 
                             if (
                                 !result.isConfirmed
@@ -1744,12 +3477,6 @@
                                     function (response)
                                     {
 
-                                        /*
-                                        |--------------------------------------------------------------------------
-                                        | SIMPAN COLOR BARU
-                                        |--------------------------------------------------------------------------
-                                        */
-
                                         input.attr(
                                             'data-old-color',
                                             newColor
@@ -1758,7 +3485,25 @@
 
                                         /*
                                         |--------------------------------------------------------------------------
-                                        | REFRESH CALENDAR
+                                        | UPDATE HEX COLOR TEXT
+                                        |--------------------------------------------------------------------------
+                                        */
+
+                                        input
+                                            .closest(
+                                                '.user-legend-item'
+                                            )
+                                            .find(
+                                                '.user-color-code'
+                                            )
+                                            .text(
+                                                newColor.toUpperCase()
+                                            );
+
+
+                                        /*
+                                        |--------------------------------------------------------------------------
+                                        | REFRESH EVENT
                                         |--------------------------------------------------------------------------
                                         */
 
@@ -1791,12 +3536,6 @@
                                 error:
                                     function (xhr)
                                     {
-
-                                        /*
-                                        |--------------------------------------------------------------------------
-                                        | KEMBALIKAN COLOR
-                                        |--------------------------------------------------------------------------
-                                        */
 
                                         input.val(
                                             oldColor
@@ -1833,7 +3572,7 @@
 
             /*
             |--------------------------------------------------------------------------
-            | MODAL CLOSE
+            | MODAL CLOSED
             |--------------------------------------------------------------------------
             */
 
