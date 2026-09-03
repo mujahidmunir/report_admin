@@ -255,7 +255,7 @@
                         <div class="calendar-sidebar-header">
 
                             <div class="legend-icon">
-                                <i class="fas fa-users"></i>
+                                <i class="bx bxs-info-circle"></i>
                             </div>
 
                             <div>
